@@ -47,9 +47,9 @@ export default function Home() {
   }
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 p-4 pt-20 pb-20">
+      <main className="flex-1 p-4 pt-20 pb-40">
         <div className="container mx-auto">
-          <h1 className="text-2xl font-bold py-5 text-center">Minhas Anotações</h1>
+          <h1 className="text-2xl font-bold py-5 text-center animate-fade-in">Minhas Anotações</h1>
           <div className="flex justify-center mb-8">
             <MenuOpcoes onClick={handleClick} />
           </div>
@@ -58,7 +58,7 @@ export default function Home() {
               Nenhuma anotação encontrada, clique no botão acima para criar uma nova anotação.
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in">
             {anotacoes}
           </div>
         </div>

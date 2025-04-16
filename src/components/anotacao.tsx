@@ -73,7 +73,7 @@ export function Anotacao({ numero, titulo, descricao, isIncluido }: { numero: nu
   }
 
   return (
-    <div className="flex flex-col items-center justify-center border-2 border-gray-300 rounded-lg p-4 h-full">
+    <div className="flex flex-col items-center justify-center border-2 border-gray-300 rounded-lg p-4 h-full animate-fade-in">
       <h1 className="text-2xl font-bold py-5 text-center">Anotação #{numero}</h1>
       <input 
         type="text" 
