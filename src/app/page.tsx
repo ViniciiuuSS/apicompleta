@@ -33,7 +33,7 @@ export default function Home() {
           />
         ));
         if(data.length === 0){
-          setLoading(false);
+          setLoading(false); 
         }
       } catch (error) {
         console.error('Erro ao buscar anotações:', error);

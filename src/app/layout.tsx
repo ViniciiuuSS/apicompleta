@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: "Anotador",  
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -15,6 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <body>
         <AuthProvider>
           <NavbarComponent/>
