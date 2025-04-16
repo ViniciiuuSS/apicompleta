@@ -1,34 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ApiCompleta
 
-## Getting Started
+Bem-vindo ao ApiCompleta, um projeto de estudo que implementa uma API REST simples para uma aplicação de anotações. Este repositório foi criado com o objetivo de aprendizado, demonstrando conceitos básicos de desenvolvimento web com Next.js e interface com Flowbite. O projeto consiste em uma tela de login e uma interface para criar, editar e excluir anotações, com armazenamento em um arquivo JSON.
 
-First, run the development server:
+Objetivo do Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O ApiCompleta é um projeto educacional para praticar o desenvolvimento de APIs RESTful e integração com front-end. Ele oferece uma aplicação funcional com:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Autenticação simples via tela de login.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Gerenciamento de anotações (criar, editar, excluir).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+Armazenamento de dados em um arquivo JSON.
+
+
+
+Interface responsiva e moderna com Flowbite.
+
+Funcionalidades
+
+
+
+
+
+Tela de Login: Interface para autenticação de usuários.
+
+
+
+Gerenciamento de Anotações:
+
+
+
+
+
+Criar novas anotações.
+
+
+
+Editar anotações existentes.
+
+
+
+Excluir anotações.
+
+
+
+Armazenamento: As anotações são salvas em um arquivo JSON (data/notes.json).
+
+
+
+Interface: Design limpo e responsivo utilizando Flowbite com Tailwind CSS.
+
+
+
+API REST: Endpoints para operações CRUD (Create, Read, Update, Delete).
+
+Tecnologias Utilizadas
+
+
+
+
+
+Frontend: Flowbite (componentes baseados em Tailwind CSS)
+
+
+
+Framework: Next.js (renderização server-side e rotas de API)
+
+
+
+Armazenamento: Arquivo JSON
+
+
+
+API: Endpoints RESTful para manipulação de anotações
