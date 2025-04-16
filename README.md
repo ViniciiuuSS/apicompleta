@@ -1,83 +1,32 @@
-ApiCompleta
+# ApiCompleta
 
-Bem-vindo ao ApiCompleta, um projeto de estudo que implementa uma API REST simples para uma aplicação de anotações. Este repositório foi criado com o objetivo de aprendizado, demonstrando conceitos básicos de desenvolvimento web com Next.js e interface com Flowbite. O projeto consiste em uma tela de login e uma interface para criar, editar e excluir anotações, com armazenamento em um arquivo JSON.
+**ApiCompleta** é um projeto educacional que implementa uma API RESTful simples para uma aplicação de anotações. Este repositório foi criado com foco em aprendizado, demonstrando conceitos fundamentais de desenvolvimento web utilizando **Next.js** e uma interface moderna com **Flowbite**.
 
-Objetivo do Projeto
+## 🎯 Objetivo
 
-O ApiCompleta é um projeto educacional para praticar o desenvolvimento de APIs RESTful e integração com front-end. Ele oferece uma aplicação funcional com:
+Praticar o desenvolvimento de APIs RESTful e a integração com o front-end, por meio de uma aplicação funcional que oferece:
 
+- Autenticação básica via tela de login  
+- Criação, edição e exclusão de anotações  
+- Armazenamento de dados em um arquivo JSON  
+- Interface responsiva e elegante com Flowbite + Tailwind CSS  
 
+## 🚀 Funcionalidades
 
+- **Tela de Login:** Interface simples para autenticação de usuários  
+- **Gerenciamento de Anotações:**
+  - Criar novas anotações  
+  - Editar anotações existentes  
+  - Excluir anotações  
+- **Armazenamento local:** Dados salvos em `data/notes.json`  
+- **Interface moderna:** Design limpo com Flowbite e Tailwind  
+- **API REST:** Endpoints para operações CRUD (Create, Read, Update, Delete)  
 
+## 🛠️ Tecnologias Utilizadas
 
-Autenticação simples via tela de login.
+- **Frontend:** [Flowbite](https://flowbite.com/) + [Tailwind CSS](https://tailwindcss.com/)  
+- **Framework:** [Next.js](https://nextjs.org/) (incluindo rotas de API e renderização server-side)  
+- **Back-end:** API RESTful com armazenamento local em JSON  
 
+---
 
-
-Gerenciamento de anotações (criar, editar, excluir).
-
-
-
-Armazenamento de dados em um arquivo JSON.
-
-
-
-Interface responsiva e moderna com Flowbite.
-
-Funcionalidades
-
-
-
-
-
-Tela de Login: Interface para autenticação de usuários.
-
-
-
-Gerenciamento de Anotações:
-
-
-
-
-
-Criar novas anotações.
-
-
-
-Editar anotações existentes.
-
-
-
-Excluir anotações.
-
-
-
-Armazenamento: As anotações são salvas em um arquivo JSON (data/notes.json).
-
-
-
-Interface: Design limpo e responsivo utilizando Flowbite com Tailwind CSS.
-
-
-
-API REST: Endpoints para operações CRUD (Create, Read, Update, Delete).
-
-Tecnologias Utilizadas
-
-
-
-
-
-Frontend: Flowbite (componentes baseados em Tailwind CSS)
-
-
-
-Framework: Next.js (renderização server-side e rotas de API)
-
-
-
-Armazenamento: Arquivo JSON
-
-
-
-API: Endpoints RESTful para manipulação de anotações
