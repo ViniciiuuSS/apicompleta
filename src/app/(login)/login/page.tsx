@@ -32,23 +32,28 @@ export default function Login() {
   };
   return (
     <div>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <form onSubmit={handleSubmit} className="max-w-sm mx-auto flex flex-col gap-1">
-          <div className="relative">
-            <div className="mb-2 block">
-              <Label htmlFor="email">Email</Label>
+      <div className="flex flex-col items-center justify-center h-screen w-full">
+        <form onSubmit={handleSubmit} className="mx-auto flex flex-row gap-1 h-full w-full">
+          <div className="flex flex-col items-center justify-center w-full border-r border-gray-200 dark:border-gray-600">
+            <div className="relative">
+              <div className="mb-2 block">
+                <Label htmlFor="email">Email</Label>
+              </div>
+              <TextInput value={email} onChange={(e) => setEmail(e.target.value)} id="email" type="email" icon={HiMail} placeholder="username@email.com" required />
             </div>
-            <TextInput value={email} onChange={(e) => setEmail(e.target.value)} id="email" type="email" icon={HiMail} placeholder="email@email.com" required />
-          </div>
-          <div className="relative py-5">
-            <div className="mb-2 block">
-              <Label htmlFor="password">Senha</Label>
+            <div className="relative py-5">
+              <div className="mb-2 block">
+                <Label htmlFor="password">Senha</Label>
+              </div>
+              <TextInput value={password} onChange={(e) => setPassword(e.target.value)} id="password" type="password" icon={HiLockClosed} placeholder="********" required />
             </div>
-            <TextInput value={password} onChange={(e) => setPassword(e.target.value)} id="password" type="password" icon={HiLockClosed} placeholder="********" required />
+            <Button type="submit" className="cursor-pointer">
+              Login
+            </Button>
           </div>
-          <Button type="submit" className="cursor-pointer">
-            Login
-          </Button>
+          <div className="flex flex-col items-center justify-center w-full">
+            <iframe src="https://lottie.host/embed/48a4f71a-f17e-42ba-850b-49c9b8153c17/XznlfCQmoo.lottie" width="50%" height="100%" className="rounded-lg "></iframe>
+          </div>
         </form>
       </div>
     </div>
