@@ -29,7 +29,6 @@ export async function POST(request: Request) {
     
     const newAnotacao = {
       ...data,
-      id: data.numero,
       createdAt: new Date().toISOString()
     };
     
@@ -49,3 +48,34 @@ export async function POST(request: Request) {
   }
 }
 
+export async function PUT(request: Request) {
+  await ensureFileExists();
+  const data = await request.json();
+  const fileContent = await fs.readFile(filePath, "utf-8");
+  const dataArray = JSON.parse(fileContent);
+  const index = dataArray.findIndex((item: { id: string }) => item.id === data.id);
+  if (index !== -1) {
+    dataArray[index] = data;
+    await fs.writeFile(filePath, JSON.stringify(dataArray, null, 2));
+  }
+  return new Response(JSON.stringify({ success: true, data: data }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+export async function DELETE(request: Request){
+    await ensureFileExists();
+    const data = await request.json();
+    const fileContent = await fs.readFile(filePath, "utf-8");
+    const dataArray = JSON.parse(fileContent);
+    const index = dataArray.findIndex((item: { id: string }) => item.id === data.id);
+    if (index !== -1) {
+        dataArray.splice(index, 1);
+        await fs.writeFile(filePath, JSON.stringify(dataArray, null, 2));
+    }
+    return new Response(JSON.stringify({ success: true, data: data }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
