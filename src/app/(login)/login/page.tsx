@@ -18,11 +18,14 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include",
       });
 
       const data = await response.json();
       if (data.error === 0) {
-        router.push("/");
+        setTimeout(() => {
+          router.push("/");
+        }, 100); // ou até 500ms, só pra testar
       } else {
         console.log("Login failed");
       }
@@ -51,7 +54,7 @@ export default function Login() {
               Login
             </Button>
           </div>
-          <div className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-col items-center justify-center w-full max-md:hidden">
             <iframe src="https://lottie.host/embed/48a4f71a-f17e-42ba-850b-49c9b8153c17/XznlfCQmoo.lottie" width="50%" height="100%" className="rounded-lg "></iframe>
           </div>
         </form>
