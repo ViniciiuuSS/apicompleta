@@ -1,81 +1,96 @@
-import fs from 'fs/promises';
-import path from 'path';
+import connectDB from "@/lib/mongodb";
+import Anotacao from "@/models/Anotacao";
 
-const filePath = path.join(process.cwd(), "data", "data.json");
-
-// Função para garantir que o arquivo existe
-async function ensureFileExists() {
+export async function GET() {
   try {
-    await fs.access(filePath);
-  } catch {
-    // Se o arquivo não existir, crie-o com um array vazio
-    await fs.writeFile(filePath, JSON.stringify([], null, 2));
+    await connectDB();
+    const anotacoes = await Anotacao.find({}).sort({ createdAt: -1 });
+    return new Response(JSON.stringify(anotacoes), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Erro ao buscar anotações:", error);
+    return new Response(JSON.stringify({ error: "Erro ao buscar anotações" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
 
-export async function GET() {
-  await ensureFileExists();
-  const data = await fs.readFile(filePath, 'utf8');
-  return new Response(data);
-}
-
 export async function POST(request: Request) {
-  await ensureFileExists();
-  
   try {
-    const fileContent = await fs.readFile(filePath, "utf-8");
-    const dataArray = JSON.parse(fileContent);
+    await connectDB();
     const data = await request.json();
-    
-    const newAnotacao = {
-      ...data,
-      createdAt: new Date().toISOString()
-    };
-    
-    dataArray.push(newAnotacao);
-    await fs.writeFile(filePath, JSON.stringify(dataArray, null, 2));
-    
+
+    const newAnotacao = await Anotacao.create({
+      titulo: data.titulo,
+      descricao: data.descricao,
+    });
+
     return new Response(JSON.stringify({ success: true, anotacao: newAnotacao }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error('Erro ao salvar anotação:', error);
-    return new Response(JSON.stringify({ success: false, error: 'Erro ao salvar anotação' }), {
+    console.error("Erro ao salvar anotação:", error);
+    return new Response(JSON.stringify({ success: false, error: "Erro ao salvar anotação" }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
 
 export async function PUT(request: Request) {
-  await ensureFileExists();
-  const data = await request.json();
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const dataArray = JSON.parse(fileContent);
-  const index = dataArray.findIndex((item: { id: string }) => item.id === data.id);
-  if (index !== -1) {
-    dataArray[index] = data;
-    await fs.writeFile(filePath, JSON.stringify(dataArray, null, 2));
+  try {
+    await connectDB();
+    const data = await request.json();
+
+    const updatedAnotacao = await Anotacao.findByIdAndUpdate(data.id, { titulo: data.titulo, descricao: data.descricao }, { new: true });
+
+    if (!updatedAnotacao) {
+      return new Response(JSON.stringify({ success: false, error: "Anotação não encontrada" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    return new Response(JSON.stringify({ success: true, anotacao: updatedAnotacao }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Erro ao atualizar anotação:", error);
+    return new Response(JSON.stringify({ success: false, error: "Erro ao atualizar anotação" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
-  return new Response(JSON.stringify({ success: true, data: data }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' }
-  });
 }
 
-export async function DELETE(request: Request){
-    await ensureFileExists();
+export async function DELETE(request: Request) {
+  try {
+    await connectDB();
     const data = await request.json();
-    const fileContent = await fs.readFile(filePath, "utf-8");
-    const dataArray = JSON.parse(fileContent);
-    const index = dataArray.findIndex((item: { id: string }) => item.id === data.id);
-    if (index !== -1) {
-        dataArray.splice(index, 1);
-        await fs.writeFile(filePath, JSON.stringify(dataArray, null, 2));
+
+    const deletedAnotacao = await Anotacao.findByIdAndDelete(data.id);
+
+    if (!deletedAnotacao) {
+      return new Response(JSON.stringify({ success: false, error: "Anotação não encontrada" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
     }
-    return new Response(JSON.stringify({ success: true, data: data }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
+
+    return new Response(JSON.stringify({ success: true, anotacao: deletedAnotacao }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
     });
+  } catch (error) {
+    console.error("Erro ao deletar anotação:", error);
+    return new Response(JSON.stringify({ success: false, error: "Erro ao deletar anotação" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
