@@ -1,10 +1,11 @@
-import connectDB from "@/lib/mongodb";
-import Anotacao from "@/models/Anotacao";
+import { findDocuments, insertDocument, updateDocument, deleteDocument } from "@/lib/mongodbApi";
+
+const DATABASE = "anotacoes";
+const COLLECTION = "anotacoes";
 
 export async function GET() {
   try {
-    await connectDB();
-    const anotacoes = await Anotacao.find({}).sort({ createdAt: -1 });
+    const anotacoes = await findDocuments(DATABASE, COLLECTION);
     return new Response(JSON.stringify(anotacoes), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -20,15 +21,15 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    await connectDB();
     const data = await request.json();
 
-    const newAnotacao = await Anotacao.create({
+    const result = await insertDocument(DATABASE, COLLECTION, {
       titulo: data.titulo,
       descricao: data.descricao,
+      createdAt: new Date(),
     });
 
-    return new Response(JSON.stringify({ success: true, anotacao: newAnotacao }), {
+    return new Response(JSON.stringify({ success: true, anotacao: result }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -43,19 +44,18 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    await connectDB();
     const data = await request.json();
 
-    const updatedAnotacao = await Anotacao.findByIdAndUpdate(data.id, { titulo: data.titulo, descricao: data.descricao }, { new: true });
+    const result = await updateDocument(DATABASE, COLLECTION, { _id: { $oid: data.id } }, { titulo: data.titulo, descricao: data.descricao });
 
-    if (!updatedAnotacao) {
+    if (!result.matchedCount) {
       return new Response(JSON.stringify({ success: false, error: "Anotação não encontrada" }), {
         status: 404,
         headers: { "Content-Type": "application/json" },
       });
     }
 
-    return new Response(JSON.stringify({ success: true, anotacao: updatedAnotacao }), {
+    return new Response(JSON.stringify({ success: true, anotacao: result }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -70,19 +70,18 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    await connectDB();
     const data = await request.json();
 
-    const deletedAnotacao = await Anotacao.findByIdAndDelete(data.id);
+    const result = await deleteDocument(DATABASE, COLLECTION, { _id: { $oid: data.id } });
 
-    if (!deletedAnotacao) {
+    if (!result.deletedCount) {
       return new Response(JSON.stringify({ success: false, error: "Anotação não encontrada" }), {
         status: 404,
         headers: { "Content-Type": "application/json" },
       });
     }
 
-    return new Response(JSON.stringify({ success: true, anotacao: deletedAnotacao }), {
+    return new Response(JSON.stringify({ success: true, anotacao: result }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
