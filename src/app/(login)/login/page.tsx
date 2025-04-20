@@ -25,6 +25,7 @@ export default function Login() {
       if (data.error === 0) {
         setTimeout(() => {
           router.push("/");
+          window.location.reload();
         }, 100); // ou até 500ms, só pra testar
       } else {
         console.log("Login failed");
