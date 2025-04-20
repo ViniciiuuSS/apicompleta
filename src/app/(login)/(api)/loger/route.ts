@@ -14,13 +14,14 @@ export async function POST(req: Request) {
       maxAge: 60 * 60 * 24 * 30,
       path: "/",
     });
+
+    redirect("/");
     return new Response(JSON.stringify({ error: 0, message: "Login bem-sucedido" }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
-    redirect("/");
   }
 
   return new Response(JSON.stringify({ error: 1, message: "Credenciais inválidas" }), {
