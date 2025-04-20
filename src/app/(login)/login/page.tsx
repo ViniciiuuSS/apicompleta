@@ -2,11 +2,9 @@
 
 import { TextInput, Button, Label } from "flowbite-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 
 export default function Login() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +31,7 @@ export default function Login() {
         console.log("Login bem-sucedido, redirecionando...");
         // Força um pequeno delay para garantir que o cookie seja processado
         await new Promise((resolve) => setTimeout(resolve, 100));
-        router.replace("/");
+        window.location.href = "/";
       } else {
         setError("Falha no login. Verifique suas credenciais.");
         console.log("Login failed:", data);
