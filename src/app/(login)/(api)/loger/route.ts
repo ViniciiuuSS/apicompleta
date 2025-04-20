@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 export async function POST(req: Request) {
   const { email, password } = await req.json();
 
@@ -14,8 +13,6 @@ export async function POST(req: Request) {
       maxAge: 60 * 60 * 24 * 30,
       path: "/",
     });
-
-    redirect("/");
     return new Response(JSON.stringify({ error: 0, message: "Login bem-sucedido" }), {
       status: 200,
       headers: {

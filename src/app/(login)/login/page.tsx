@@ -21,10 +21,8 @@ export default function Login() {
       });
 
       const data = await response.json();
-      if (data.error === 0) {
-        setTimeout(() => {
-          redirect("/");
-        }, 500); // ou até 500ms, só pra testar
+      if (data.error == 0) {
+        redirect("/");
       } else {
         console.log("Login failed");
       }
