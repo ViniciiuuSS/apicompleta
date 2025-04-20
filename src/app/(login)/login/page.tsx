@@ -2,13 +2,12 @@
 
 import { TextInput, Button, Label } from "flowbite-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -24,9 +23,8 @@ export default function Login() {
       const data = await response.json();
       if (data.error === 0) {
         setTimeout(() => {
-          router.push("/");
-          window.location.reload();
-        }, 100); // ou até 500ms, só pra testar
+          redirect("/");
+        }, 500); // ou até 500ms, só pra testar
       } else {
         console.log("Login failed");
       }
