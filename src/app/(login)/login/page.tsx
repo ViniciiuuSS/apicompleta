@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    debugger;
     e.preventDefault();
     try {
       const response = await fetch("/loger", {
@@ -19,9 +20,11 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-
+      console.log(response);
       const data = await response.json();
+      console.log(data);
       if (data.error == 0) {
+        console.log("Login bem-sucedido, redirecionando...");
         redirect("/");
       } else {
         console.log("Login failed");
